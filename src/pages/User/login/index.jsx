@@ -8,11 +8,13 @@ import {
   WeiboCircleOutlined,
 } from '@ant-design/icons';
 import { Alert, Space, message, Tabs } from 'antd';
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
-import { useIntl, connect, FormattedMessage } from 'umi';
+import { history, useIntl, connect, FormattedMessage } from 'umi';
+import cookie from 'react-cookies'
 import { getFakeCaptcha } from '@/services/login';
 import styles from './index.less';
+import request from '@/utils/request';
 
 const LoginMessage = ({ content }) => (
   <Alert
@@ -30,18 +32,23 @@ const Login = (props) => {
   const { status, type: loginType } = userLogin;
   const [type, setType] = useState('account');
   const intl = useIntl();
-
+  
+  useEffect(() => {
+    cookie.remove('token');
+  });
   const handleSubmit = (values) => {
     const { dispatch } = props;
     dispatch({
-      type: 'login/login',
+      type: 'LoginBack/LoginMes',
       payload: { ...values, type },
     });
+     
+    //history.push('/welcome');
   };
 
   return (
     <div className={styles.main}>
-      <ProForm
+      <ProForm 
         initialValues={{
           autoLogin: true,
         }}
@@ -61,20 +68,23 @@ const Login = (props) => {
         }}
       >
         <Tabs activeKey={type} onChange={setType}>
+        <Tabs.TabPane
+            key="mobile"
+            tab="行人追踪登录"
+            // tab={intl.formatMessage({
+            //   id: 'pages.login.phoneLogin.tab',
+            //   defaultMessage: 'Mobile phone number login',
+            // })}
+          />
           <Tabs.TabPane
             key="account"
-            tab={intl.formatMessage({
-              id: 'pages.login.accountLogin.tab',
-              defaultMessage: 'Account password login',
-            })}
+            tab="赛道登录"
+            // tab={intl.formatMessage({
+            //   id: 'pages.login.accountLogin.tab',
+            //   defaultMessage: 'Account password login',
+            // })}
           />
-          <Tabs.TabPane
-            key="mobile"
-            tab={intl.formatMessage({
-              id: 'pages.login.phoneLogin.tab',
-              defaultMessage: 'Mobile phone number login',
-            })}
-          />
+          
         </Tabs>
 
         {status === 'error' && loginType === 'account' && !submitting && (

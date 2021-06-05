@@ -377,7 +377,7 @@ const TableList = () => {
           setCurrentRow(undefined);
           setShowDetail(false);
         }}
-        closable={false}
+        closable={true}
       >
         {currentRow?.name && (
           <ProDescriptions

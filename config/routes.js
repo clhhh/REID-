@@ -9,7 +9,7 @@ export default [
         routes: [
           {
             name: 'login',
-            path: '/user/login',
+            path: '/user',
             component: './User/login',
           },
         ],
@@ -25,7 +25,7 @@ export default [
             routes: [
               {
                 path: '/',
-                redirect: '/welcome',
+                redirect: '/user',
               },
               {
                 path: '/welcome',
@@ -55,6 +55,48 @@ export default [
                 path: '/list',
                 component: './TableList',
               },
+              {
+                name: '比赛',
+                icon: 'table',
+                path: '/matchlist',
+                routes: [
+                  {
+                    path: '/matchlist/list',
+                    name: '比赛列表',
+                    icon: 'setting',
+                    component: './match',
+                  }
+                 
+                ],
+               
+              },
+              {
+                name: '监控',
+                icon: 'table',
+                path: '/monitor_list',
+                component: './monitor',
+              },
+              {
+                name: '案件',
+                icon: 'table',
+                path: '/case_list',
+                // component: './caselist',
+                routes: [
+                  {
+                    path: '/case_list',
+                    name: '案件统计',
+                    icon: 'setting',
+                    component: './caselist',
+                  }
+                 
+                ],
+              },
+              {
+                name: '个人中心',
+                icon: 'table',
+                path: '/pensonal',
+                component: './personalcenter',
+              },             
               {
                 component: './404',
               },

@@ -1,6 +1,7 @@
 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */
 import { extend } from 'umi-request';
 import { notification } from 'antd';
+import cookie from 'react-cookies'
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -51,5 +52,32 @@ const request = extend({
   errorHandler,
   // default error handling
   credentials: 'include', // Does the default request bring cookies
+  timeout: 30000,
+  headers: {
+    
+    // 'Content-Type': 'application/json',
+    Accept: 'application/json',
+    //token:sessionStorage.getItem("token")
+    token:cookie.load("token")
+  },
+  throwErrIfParseFail: true, //当JSON.parse(res) 出错时，抛出错误
 });
+// request.interceptors.request.use(async (url, options) => {
+//   if (
+//     options.method === 'post' ||
+//     options.method === 'put' ||
+//     options.method === 'delete' ||
+//     options.method === 'get'
+//   ) {
+//     const headers = {
+      
+//       Accept: 'application/json',
+//       token:localStorage.getItem("token")
+//     };
+//     return {
+//       url,
+//       options: { ...options, headers },
+//     };
+//   }
+// });
 export default request;

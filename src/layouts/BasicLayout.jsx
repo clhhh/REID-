@@ -41,7 +41,7 @@ const defaultFooterDom = (
     links={[
       {
         key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
+        title: 'Ant Design Pr',
         href: 'https://pro.ant.design',
         blankTarget: true,
       },

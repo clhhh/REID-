@@ -8,12 +8,37 @@
  */
 export default {
   dev: {
-    '/api/': {
-      target: 'https://preview.pro.ant.design',
+    '/api.farm/': {
+      target: 'https://api.fmg.net.cn/',
       changeOrigin: true,
       pathRewrite: {
-        '^': '',
+        '^/api.farm': '',
       },
+    },
+    '/api.request': {
+      target: 'https://order.kuaidi100.com/',
+      pathRewrite: { '^/api.request': '' },
+      changeOrigin: true,
+    },
+    '/api.poll': {
+      target: 'https://poll.kuaidi100.com/',
+      pathRewrite: { '^/api.poll': '' },
+      changeOrigin: true,
+    },
+    '/api.loginCheck': {
+      target: 'http://1.15.182.218:8080/',
+      pathRewrite: { '^/api.loginCheck': '' },
+      changeOrigin: true,
+    },
+    '/api.local': {
+      target: 'http://192.168.163.1:8080/',
+      pathRewrite: { '^/api.local': '' },
+      changeOrigin: true,
+    },
+    '/api.case': {
+      target: 'http://42.194.206.15:8000/',
+      pathRewrite: { '^/api.case': '' },
+      changeOrigin: true,
     },
   },
   test: {
