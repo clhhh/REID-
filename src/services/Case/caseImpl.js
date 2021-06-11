@@ -13,3 +13,10 @@ export async function createCaseByAdmin(payload) {
         data: payload,
     });
   }
+  export async function searchCaseByName(payload) {
+    console.log("开始调用搜索人名案件service")
+    return request('/api.case/case/fuzzysearch/name',{
+        method:'POST',
+        data: payload,
+    });
+  }

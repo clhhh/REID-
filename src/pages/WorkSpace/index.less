@@ -1,0 +1,62 @@
+@whiteComponent: white;
+.preview{
+    display:grid;
+    grid-template-columns: 1.4fr 1.3fr 1fr;
+    grid-template-rows: 150px 130px 150px 150px;   
+    // grid-template-rows: 1fr 1fr 1fr 1fr;  
+    // background-color: white;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+}
+.head{
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    // grid-area: 1/2/1/4;
+    background-color: @whiteComponent;
+}
+.caselist{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 5;
+    background-color: @whiteComponent;
+}
+.fastStart{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    background-color: @whiteComponent;
+    
+}
+.fastStartBtnArea{
+    display: flex;
+    margin-top: -15%;
+}
+.flowRate{
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 5;
+    background-color: @whiteComponent;
+}
+.buttonstyle{
+    margin-top: 20%;
+    flex-grow: 1;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.adminDisplay{
+    display: flex;
+    align-items: center;
+    // background-color: white;
+}
+.img{
+    height: 60px;
+    width: 60px;
+    margin-left: 5%;
+    margin-top: 5%;
+    float: left;
+}

@@ -105,7 +105,7 @@ const LoginClassModel = {
         });
         if (response.code === 200){
           // message.success('🎉 🎉 🎉  登录成功！').then(()=>(history.push('/matchlist/list')));         
-          history.push('/matchlist/list')
+          history.push('/workspace')
           message.success('🎉 🎉 🎉  登录成功！')
           sessionStorage.setItem("token",response.obj);
         }

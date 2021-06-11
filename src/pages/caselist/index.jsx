@@ -1,11 +1,14 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'umi';
-import { Table, Tag, Space,Button,Drawer,Form,Input } from 'antd';
 import { get } from 'lodash';
+import { Table, Tag, Space,Button,Drawer,Form,Input,Cascader  } from 'antd';
+
+import './index.less'
 const { Column, ColumnGroup } = Table;
 
 
+const { Search } = Input;
 const data = [
   {
     key: '1',
@@ -32,51 +35,95 @@ const data = [
     tags: ['未审核'],
   },
 ];
+const options = [
+  {
+    value: 'zhejiang',
+    label: '目标姓名',
+  },
+  {
+    value: 'zhejiang',
+    label: '案例码',
+  }
+]
 
 
 const CaseShow = (props)=>{ 
   const {caseList} = props; 
   const [showDetail, setShowDetail] = useState(false);
    let arrList = []
+   let arrList2 = []
   useEffect(() => {
     props.dispatch({
       type: 'CaseListBack/fetchCaseList',
       payload: {  zone_name: "BNUZ"
       },
     });
-   
-
   }, []);
-  if(caseList.data){ 
-    
-    console.log(caseList.data)
-    
-     arrList = caseList.data.map(
-       (item,index,arr)=>{
-         console.log(item,index,arr)
-      return (
-        item.fields
-      )
-    })
   
+const onSearch=(values)=>{
+  props.dispatch({
+    type: 'CaseListBack/searchCaseListByName',
+    payload: { target_name:values
+    },
+  });
 }
 const handleSubmit = (values) => {
-  console.log(values);
+  // console.log(values);
   props.dispatch({
     type: 'CaseListBack/createCase',
     payload: { ...values },
-  });
-   
-  //history.push('/welcome');
+  })
+  .then(
+    props.dispatch({
+    type: 'CaseListBack/fetchCaseList',
+    payload: {  zone_name: "BNUZ"
+    },
+  }))
+
 };
 
+if(caseList.data){ 
+    if(caseList.data=='null'){
+      console.log(11);
+    }else{
+      arrList = caseList.data.map(
+        (item,index,arr)=>{
+         //  console.log(item,index,arr)
+       return (
+         item.fields
+       )
+     })
+    }
+  // console.log(caseList.data)
+}
+
+
+console.log(arrList)
   return(
   <div>
-    <div>
-    <Button type="primary" onClick={() => { setShowDetail(true); }}>新建案件</Button>
-    </div>
-  <Table dataSource={ arrList }>
     
+    <div className='search'>
+    <h1 className='c' >案件列表</h1>
+    <h5 className='d'>搜索关键字</h5>
+    <Cascader className='a'
+    defaultValue={['目标姓名']}
+    options={options}
+    // onChange={onChange}
+    />
+    <Search className='b'
+      placeholder="input search text"
+      allowClear
+      enterButton="Search"
+      size="large"
+      onSearch={onSearch}
+    />
+    </div>
+    
+    <div className='createCase'>
+    <Button  type="primary" onClick={() => { setShowDetail(true); }}>新建案件</Button>
+    </div>
+  <Table dataSource={arrList }>
+  {/* <Table dataSource={ arrList2===[]?arrList:arrList2 }> */}
     <Column title="案件码" dataIndex="case_number" key="a" />
     <Column title="目标姓名" dataIndex="target_name" key="b" />
     <Column title="性别" key="gender"
@@ -222,7 +269,7 @@ const handleSubmit = (values) => {
       </Form.Item>
       <Form.Item >
         <Button type="primary" htmlType="submit" onClick>
-          Submit
+          创建案件
         </Button>
       </Form.Item>
           </Form>

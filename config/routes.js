@@ -49,32 +49,44 @@ export default [
                   },
                 ],
               },
+              // {
+              //   name: 'list.table-list',
+              //   icon: 'table',
+              //   path: '/list',
+              //   component: './TableList',
+              // },
               {
-                name: 'list.table-list',
+                name: '工作台',
                 icon: 'table',
-                path: '/list',
-                component: './TableList',
+                path: '/workspace',
+                component: './WorkSpace',
               },
-              {
-                name: '比赛',
-                icon: 'table',
-                path: '/matchlist',
-                routes: [
-                  {
-                    path: '/matchlist/list',
-                    name: '比赛列表',
-                    icon: 'setting',
-                    component: './match',
-                  }
+              // {
+              //   name: '比赛',
+              //   icon: 'table',
+              //   path: '/matchlist',
+              //   routes: [
+              //     {
+              //       path: '/matchlist/list',
+              //       name: '比赛列表',
+              //       icon: 'setting',
+              //       component: './match',
+              //     }
                  
-                ],
+              //   ],
                
-              },
+              // },
               {
                 name: '监控',
                 icon: 'table',
                 path: '/monitor_list',
                 component: './monitor',
+              },
+              {
+                name: '用户管理',
+                icon: 'table',
+                path: '/user_list',
+                component: './userlist',
               },
               {
                 name: '案件',
@@ -96,7 +108,13 @@ export default [
                 icon: 'table',
                 path: '/pensonal',
                 component: './personalcenter',
-              },             
+              },  
+              // {
+              //   name: '组件测试',
+              //   icon: 'table',
+              //   path: '/component',
+              //   component: './componentList',
+              // },            
               {
                 component: './404',
               },
