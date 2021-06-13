@@ -1,8 +1,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'umi';
+import { connect,history } from 'umi';
 import { get } from 'lodash';
-import { Table, Tag, Space,Button,Drawer,Form,Input,Cascader  } from 'antd';
+import { Table, Tag, Space,Button,Drawer,Form,Input,Cascader, message  } from 'antd';
 
 import './index.less'
 const { Column, ColumnGroup } = Table;
@@ -52,13 +52,7 @@ const CaseShow = (props)=>{
   const [showDetail, setShowDetail] = useState(false);
    let arrList = []
    let arrList2 = []
-  useEffect(() => {
-    props.dispatch({
-      type: 'CaseListBack/fetchCaseList',
-      payload: {  zone_name: "BNUZ"
-      },
-    });
-  }, []);
+  
   
 const onSearch=(values)=>{
   props.dispatch({
@@ -67,6 +61,36 @@ const onSearch=(values)=>{
     },
   });
 }
+
+var promise=new Promise(function(resolve,reject){
+  useEffect(() => {
+    props.dispatch({
+      type: 'CaseListBack/fetchCaseList',
+      payload: {  zone_name: "BNUZ"},
+    });
+  }, []);
+  if(caseList.data){ 
+    
+    if(caseList.data=='null'){
+      reject(
+        message.error('查不到该案件信息')  
+      )
+    }else{
+      resolve(
+        arrList = caseList.data.map(
+          (item,index,arr)=>{
+           //  console.log(item,index,arr)
+         return (
+           item.fields
+         )
+       })
+      ) 
+    }
+  // console.log(caseList.data)
+}
+})
+promise.then()
+
 const handleSubmit = (values) => {
   // console.log(values);
   props.dispatch({
@@ -82,20 +106,7 @@ const handleSubmit = (values) => {
 
 };
 
-if(caseList.data){ 
-    if(caseList.data=='null'){
-      console.log(11);
-    }else{
-      arrList = caseList.data.map(
-        (item,index,arr)=>{
-         //  console.log(item,index,arr)
-       return (
-         item.fields
-       )
-     })
-    }
-  // console.log(caseList.data)
-}
+
 
 
 console.log(arrList)
@@ -185,7 +196,7 @@ console.log(arrList)
       key="action"
       render={(text, record) => (
         <Space size="middle">
-          <a>详情</a>
+          <a onClick={()=>history.push('./case_list/details')}>详情</a>
           <a>审核</a>
           
         </Space>

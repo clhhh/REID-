@@ -61,6 +61,12 @@ export default [
                 path: '/workspace',
                 component: './WorkSpace',
               },
+              {
+                name: '园区管理',
+                icon: 'table',
+                path: '/field',
+                component: './field',
+              },
               // {
               //   name: '比赛',
               //   icon: 'table',
@@ -95,12 +101,17 @@ export default [
                 // component: './caselist',
                 routes: [
                   {
-                    path: '/case_list',
+                    path: '/case_list/case',
                     name: '案件统计',
                     icon: 'setting',
                     component: './caselist',
-                  }
-                 
+                  },
+                  {
+                    path: '/case_list/details',
+                    name: '案件详情',
+                    icon: 'setting',
+                    component: './casedetail',
+                  },
                 ],
               },
               {
